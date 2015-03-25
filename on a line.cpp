@@ -11,7 +11,7 @@ public:
         int count(0);
         maxnum = 0;
         int distanceflag;
-        double lenght,lenght1,lenght2;
+        int lenght,lenght1,lenght2;
         vector<Point>::reverse_iterator it1,it2,it3;
         while(1)
         {
@@ -46,30 +46,29 @@ public:
         else
             return 0;
     }
-    double getdistance(int x1, int y1, int x2, int y2)
+    int getdistance(int x1, int y1, int x2, int y2)
     {
         int temp1,temp2;
-        temp1=square(x1-x2);
-        temp2=square(y1-y2);
-        return sqrt(temp1+temp2);
+        temp1=(x1-x2)*(x1-x2);
+        temp2=(y1-y2)*(y1-y2);
+        return (temp1+temp2);
     }
-    inline bool isonline(double &lenght,double &lenght1,double &lenght2,int lenghtflag, int flag)
+    inline bool isonline(int &lenght,int &lenght1,int &lenght2,int lenghtflag, int flag)
     {
-        bool rt;
         switch(lenghtflag)
         {
             case -1:
                 if(flag == 0)
-                    return doubleequal((lenght+lenght2),lenght1);
+                    return ((lenght+lenght2) == lenght1)?true:false;
                 else
-                    return doubleequal((lenght+lenght1),lenght2);
+                    return ((lenght+lenght1) == lenght2)?true:false;
             case 0:
-                return doubleequal((lenght1+lenght2),lenght);
+                return ((lenght1+lenght2) == lenght)?true:false;
             case 1:
                 if(flag ==0)
-                    return doubleequal((lenght+lenght1),lenght2);
+                    return ((lenght+lenght1) == lenght2)?true:false;
                 else
-                    return doubleequal((lenght+lenght2),lenght1);
+                    return ((lenght+lenght1) == lenght2)?true:false;
             
             default:
                 return false;
@@ -79,15 +78,5 @@ public:
     {
         if(num > maxnum)
             maxnum = num;
-    }
-    inline int square(int num)
-    {
-        return num*num;
-    }
-    inline bool doubleequal(double num1, double num2)
-    {
-        if((num1 - num2)< 0.000000005)
-            return true;
-        else return false;
     }
 };
